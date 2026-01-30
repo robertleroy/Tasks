@@ -9,6 +9,9 @@ RUN npm run build
 # 2. Use a clean Node image to run the app
 FROM node:20-alpine
 WORKDIR /app
+# Ensure the SQLite folder exists
+RUN mkdir -p /app/data
+
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
 COPY package.json .

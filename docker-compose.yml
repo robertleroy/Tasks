@@ -1,8 +1,15 @@
 version: '3.8'
 services:
-  tab-app:
+  tasks-app:
     build: .
     ports:
-      - "3002:3000"  # Changes "3000" if your app runs on a different port
-    restart: no
+      - "3002:3000" # Host 3002 -> Container 3000
+    restart: always
+    volumes:
+      - tasks-db:/app/data # This creates a persistent 'shelf' for your DB
+    environment:
+      - DATABASE_URL=file:/app/data/tasks.db
+      - NODE_ENV=production
 
+volumes:
+  tasks-db: # This tells Docker to manage a permanent storage area
