@@ -12,4 +12,4 @@ services:
       - NODE_ENV=production
 
 volumes:
-  tasks-db: # This tells Docker to manage a permanent storage area -
+  tasks-db: # This tells Docker to manage a permanent storage area 

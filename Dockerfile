@@ -4,7 +4,8 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci
 COPY . .
-RUN npm run build
+# RUN npm run build
+RUN DATABASE_URL=file:dummy.db npm run build
 
 # 2. Use a clean Node image to run the app
 FROM node:20-alpine
@@ -19,5 +20,5 @@ COPY package.json .
 EXPOSE 3000
 ENV NODE_ENV=production
 
-# This starts the SvelteKit server -
+# This starts the SvelteKit server 
 CMD [ "node", "build" ]
