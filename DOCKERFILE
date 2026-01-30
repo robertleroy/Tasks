@@ -19,5 +19,5 @@ COPY package.json .
 EXPOSE 3000
 ENV NODE_ENV=production
 
-# This starts the SvelteKit server
+# This starts the SvelteKit server -
 CMD [ "node", "build" ]
