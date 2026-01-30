@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <circle r="2.5" cy="4" cx="4"/>
+  <circle r="2.5" cy="12" cx="4"/>
+  <circle r="2.5" cy="20" cx="4"/>
+  <circle r="2.5" cy="12" cx="12"/>
+  <circle r="2.5" cy="20" cx="12"/>
+  <circle r="2.5" cy="20" cx="20"/>
+</svg>

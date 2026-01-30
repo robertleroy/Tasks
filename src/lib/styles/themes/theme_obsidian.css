@@ -1,0 +1,64 @@
+/* #region theme_obsidian - January 2026 */
+
+:root {
+  /* #region base *********************** */
+  --base-00:  light-dark(hsl(0 0 100), hsl(0 0 12));
+  --base-05:  light-dark(hsl(0 0 99), hsl(0 0 13));
+  --base-10:  light-dark(hsl(0 0 98), hsl(0 0 14));
+  --base-20:  light-dark(hsl(0 0 97), hsl(0 0 15));
+  --base-25:  light-dark(hsl(0 0 89), hsl(0 0 16));
+  --base-30:  light-dark(hsl(0 0 88), hsl(0 0 21));
+  --base-35:  light-dark(hsl(0 0 83), hsl(0 0 25));
+  --base-40:  light-dark(hsl(0 0 74), hsl(0 0 33));
+  --base-50:  light-dark(hsl(0 0 67), hsl(0 0 40));
+  --base-60:  light-dark(hsl(0 0 44), hsl(0 0 60));
+  --base-70:  light-dark(hsl(0 0 36), hsl(0 0 70));
+  --base-100:  light-dark(hsl(0 0 13), hsl(0 0 78));
+  /* #endregion base */
+
+  /* foreground */
+  --fg-1 : var(--base-100);
+  --fg-2 : var(--base-70);
+  --fg-3 : var(--base-50);
+  --fg-muted: var(--base-50);
+  --fg: var(--fg-1);
+
+  /* background */
+  --bg: var(--base-00);
+  --bg-1: var(--base-10);
+  --bg-2: var(--base-20);
+  --bg-3: var(--base-30);
+  --bg-4: var(--base-40);
+  
+  /* border */
+  --border-color: light-dark(
+    hsl(207 20 80), 
+    hsl(0 0 40 / 0.2));
+  --outline-color: light-dark(
+    hsl(207 20 70),
+    hsl(0 0 40));
+
+  --bg-active: hsl(0 0 0 / 0.067);
+  --bg-hover: hsl(0 0 0 / 0.067);
+  --bg-panel: var(--bg-2);
+
+  --highlight-mix-blend-mode: light-dark(darken, lighten);
+  --divider-color: var(--base-30);
+  --divider-color-hover: hsl(258 88 66);
+
+  /* color */
+  --red:  light-dark(hsl(353 81 55), hsl(353 96 63));
+  --orange:  light-dark(hsl(30 100 46), hsl(31 79 58));
+  --yellow:  light-dark(hsl(46 100 44), hsl(59 64 66));
+  --green:  light-dark(hsl(144 92 38), hsl(138 59 54));
+  --cyan:  light-dark(hsl(179 100 37), hsl(179 69 60));
+  --blue:  light-dark(hsl(212 93 45), hsl(212 100 50));
+  --purple:  light-dark(hsl(255 82 63), hsl(258 100 75));
+  --pink:  light-dark(hsl(331 65 53), hsl(328 91 79));
+  --error : var(--red);
+  --warning : var(--orange);
+  --success : var(--green);
+  --link-color: linktext;   
+  --active-color: hsl(150 50 50);
+}
+/* #endregion Theme Obsidian */

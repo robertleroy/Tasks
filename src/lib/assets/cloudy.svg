@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" data-title="darkcloud" viewBox="0 0 24 24">
+  <defs>
+    <linearGradient id="b">
+      <stop offset="0" stop-color="#546e7a"/>
+      <stop offset="1" stop-color="#cfd8dc"/>
+    </linearGradient>
+    <linearGradient xlink:href="#b" id="e" x1="14.027" x2="10.056" y1="14.5" y2="6.572" gradientTransform="translate(0 -.5)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#b" id="g" x1="12.983" x2="9.039" y1="14.411" y2="6.5" gradientTransform="translate(0 -.5)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#b" id="d" x1="10" x2="6.061" y1="17" y2="9.063" gradientTransform="translate(0 -.062)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#b" id="h" x1="15" x2="11" y1="17.5" y2="9.5" gradientTransform="translate(0 .5)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#b" id="f" x1="18" x2="14" y1="16" y2="7.5" gradientTransform="matrix(1 0 0 .94117 0 .941)" gradientUnits="userSpaceOnUse"/>
+    <linearGradient xlink:href="#a" id="c" x1="10" x2="6" y1="18" y2="11" gradientUnits="userSpaceOnUse"/>
+  </defs>
+  <g class="darkcloud">
+    <circle cx="9.5" cy="15.5" r="2.5" fill="url(#c)" paint-order="markers fill stroke"/>
+    <g class="darkcloud">
+      <path fill="url(#d)" d="M9.518 9a2.5 2.5 0 0 1 2.437 2.968 2.5 2.5 0 0 1-2.629 4.239 2.5 2.5 0 0 1-4.123-.725 2.5 2.5 0 0 1-.245-4.923 2.5 2.5 0 0 1 2.871-.917A2.5 2.5 0 0 1 9.518 9" class="cloud"/>
+      <path fill="url(#e)" d="M11.51 14a2.5 2.5 0 0 0 1.81-.793c.56.298 1.212.372 1.824.208a2.5 2.5 0 0 0 1.213-4.085c.167-.475.187-.99.057-1.477a2.503 2.503 0 0 0-4.247-1.06 2.506 2.506 0 0 0-3.22.768c-1.681.399-2.144 2.02-1.875 3.087.25.99 1.104 1.712 2.119 1.834A2.5 2.5 0 0 0 11.51 14" class="cloud"/>
+      <path fill="url(#f)" d="M16.596 8.002a2.6 2.6 0 0 0-.742.079 2.54 2.54 0 0 0-1.18.665 2.64 2.64 0 0 0-1.82-.194c-1.334.336-2.126 1.627-1.768 2.882.088.31.243.6.455.85-.067.343-.05.696.045 1.032.357 1.256 1.729 1.999 3.063 1.662q.274-.069.525-.195c.094.095.2.174.307.252A2.5 2.353 0 0 0 17.5 16a2.5 2.353 0 0 0 2.5-2.353 2.5 2.353 0 0 0-.047-.447c.83-.56 1.235-1.552.96-2.514-.292-1.029-1.282-1.745-2.414-1.745a2.55 2.55 0 0 0-1.904-.939z" class="cloud"/>
+      <path fill="url(#g)" d="M9.982 6A2.5 2.5 0 0 0 7.52 8.201 2.5 2.5 0 0 0 8.5 13a2.5 2.5 0 0 0 3.826.207 2.5 2.5 0 0 0 3.132-3.76 2.5 2.5 0 0 0-3.106-2.862 2.5 2.5 0 0 0-.526.208A2.5 2.5 0 0 0 9.982 6" class="cloud"/>
+      <path fill="url(#h)" d="M12.483 10a2.5 2.5 0 0 0-1.982 1 2.5 2.5 0 0 0-2.415 3.147c.152.565.544 1.001.976 1.396.514 1.783 2.016 2.13 3.086 1.872a2.2 2.2 0 0 0 .526-.208A2.5 2.5 0 0 0 17 15.5a2.5 2.5 0 0 0-2.387-4.337A2.5 2.5 0 0 0 12.483 10" class="cloud"/>
+    </g>
+  </g>
+</svg>
+

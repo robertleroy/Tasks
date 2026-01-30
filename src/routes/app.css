@@ -1,0 +1,256 @@
+@import "$lib/styles/base.css";
+
+:root {
+  --header-height: 3rem;
+  --max-app-width: 1400px;
+  --sidebar-width: 260px;
+  --max-page-width: 640px;
+  --pad: 1rem;
+}
+
+.app {
+  height: 100dvh;
+  width: 100%;
+  display: grid;
+  grid-template-rows: var(--header-height) 1fr auto;
+}
+
+header {
+  top: 0;
+  background-color: var(--bg-panel);
+  border-bottom: var(--border);
+
+  .inner {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    max-width: var(--max-app-width);
+    padding-right: var(--pad);
+  }
+
+  .titlebar {
+    display: flex;
+    gap: 0 1ch;
+    height: 100%;
+    align-items: center;
+    padding: 0 var(--pad);
+    flex-basis: var(--sidebar-width);
+  }
+
+  .brand {
+    display: flex;
+    gap: 0.1ch;
+
+    .title {
+      font-size: 1em;
+      font-weight: 600;
+
+      @media (min-width: 640px) {
+        font-size: 1.25em;
+      }
+    }
+  }
+
+  .featurebar {
+    padding: 0 var(--pad);
+    flex: 1;
+  }
+}
+
+main {
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+aside {
+  background-color: var(--bg-panel);
+  border-right: var(--border);
+  width: var(--sidebar-width);
+  transition: width 300ms;
+
+  .sidebar {
+    position: relative;
+    width: var(--sidebar-width);
+    padding: var(--pad);
+  }
+
+  .addListPanel {
+    width: fit-content;
+    margin: 0 0 1rem;
+
+    input[type="text"] {
+      width: 100%;
+      max-width: 9rem;
+      min-width: 4rem;
+    }
+  }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem 0.25rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+
+    input {
+      width: 10rem;
+      min-width: 4rem;
+    }
+
+    input,
+    button {
+      font-size: 13px;
+    }
+  }
+
+  .addNewListBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  nav.index {
+    display: grid;
+    gap: 0.25rem;
+  }
+}
+
+
+section.router {
+  flex: 1;
+  background-color: var(--bg);
+  overflow: hidden auto;
+
+  .inner {
+    height: 100%;
+    max-width: calc(var(--max-app-width) - var(--sidebar-width));
+  }
+
+  .page {
+    position: relative;
+    padding: var(--pad);
+    background-color: var(--bg);
+    height: 100%;
+    max-width: var(--max-page-width);
+    margin: 0 auto;
+  }
+}
+
+
+footer {
+  height: 2rem;
+  background-color: var(--bg-panel);
+  border-top: var(--border);
+  align-content: center;
+
+  .inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0 var(--pad);
+    padding: 0.25rem var(--pad);
+  }
+}
+
+
+@media (min-width: 600px) {
+  .sidebarToggleBtn {
+    display: none;
+  }
+}
+
+
+/* #region popover */
+[popover] {
+  position: absolute;
+  inset: auto;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  interpolate-size: allow-keywords;
+  z-index: -1;
+}
+
+#settings_anchor {
+  anchor-name: --settings_anchor;
+}
+
+#settings_target {
+  position-anchor: --settings_anchor;
+  display: grid;
+  gap: 0.375rem 0;
+
+  font-size: 0.875rem;
+  color: var(--fg-1);
+  background: var(--bg-2);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--fg-3);
+  top: anchor(bottom);
+  right: anchor(right);
+  margin: 2px 0;
+
+  button {
+    font-size: inherit;
+    background: inherit;
+    color: inherit;
+
+    &:not(:hover:not(:active)) {
+      text-decoration: underline;
+    }
+  }
+
+  hr {
+    margin: 0.25rem 0;
+    width: 100%;
+  }
+}
+/* #endregion popover */
+
+
+/* #region utility */
+.hideSidebar {
+  width: 0;
+}
+
+.drag-handle {
+  position: relative;
+  cursor: default;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: inline flow-root;
+  text-align: center;
+
+  &::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    content: "⋮⋮";
+  }
+}
+
+.sortable-container {
+  display: contents;
+}
+
+input[type="text"].editbox {
+  border: unset;
+  border-radius: 0;
+  outline: unset;
+  background: unset;
+
+  &:focus {
+    box-shadow: 0 1px 0px 0 var(--fg-muted);
+  }
+
+  &::placeholder {
+    font-style: italic;
+  }
+
+  a.unset {
+    line-height: 1;
+  }
+}
+/* #region utility */

@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  tab-app:
+    build: .
+    ports:
+      - "3002:3000"  # Changes "3000" if your app runs on a different port
+    restart: no
+

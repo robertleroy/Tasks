@@ -1,0 +1,281 @@
+<script>
+  import { tick, enhance, invalidateAll, goto } from "$lib";
+  import { SortableList, ConfirmBtn, Icon } from "$lib/components";
+
+  let { data } = $props();
+  let inputs = $state({});
+  let isAdding = $state(false);
+  let currentList = $derived(data?.list);
+
+  let activeItems = $derived(data.items.filter((item) => !item.checked).toSorted((a, b) => a.activePosition - b.activePosition));
+
+  let checkedItems = $derived(data.items.filter((item) => item.checked).toSorted((a, b) => a.checkedPosition - b.checkedPosition));
+
+  async function updateItem(item) {
+    const response = await fetch("/api/items", {
+      method: "PATCH",
+      body: JSON.stringify({
+        id: item.id,
+        name: item.name,
+        checked: item.checked,
+      }),
+    });
+    if (response.ok) {
+      await invalidateAll();
+    }
+  }
+
+  async function deleteItem(id) {
+    await fetch("/api/items", {
+      method: "DELETE",
+      body: JSON.stringify({ id }),
+    });
+    await invalidateAll();
+  }
+
+  async function handleItemReorder(orderedIds, listType) {
+    const updates = orderedIds.map((item, index) => {
+      if (listType === "active") {
+        return { id: item.id, activePosition: index, checkedPosition: index };
+      } else {
+        return { id: item.id, checkedPosition: index };
+      }
+    });
+
+    await fetch("/api/reorder", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "items", updates }),
+    });
+  }
+
+  async function createNextItem(currentItem) {
+    if (isAdding) return;
+    isAdding = true;
+
+    const response = await fetch("/api/items", {
+      method: "POST",
+      body: JSON.stringify({
+        listId: currentList.id,
+        afterPosition: currentItem.activePosition,
+      }),
+    });
+
+    if (response.ok) {
+      const result = await response.json();
+      const newId = result.id;
+
+      await invalidateAll();
+      await tick();
+      inputs[newId]?.focus();
+    }
+    isAdding = false;
+  }
+
+  async function updateListName(newName) {
+    // Only update if the name actually changed
+    // console.log(e.target.value);
+    // if (currentList === e.target.value) return;
+
+    const res = await fetch("/api/lists", {
+      method: "PATCH",
+      body: JSON.stringify({
+        id: currentList.id,
+        name: newName,
+      }),
+    });
+
+    if (res.ok) {
+      await invalidateAll();
+    }
+  }
+
+  async function deleteList() {
+    const res = await fetch("/api/lists", {
+      method: "DELETE",
+      body: JSON.stringify({ id: currentList.id }),
+    });
+
+    if (res.ok) goto("/");
+  }
+</script>
+
+<div class="header">
+  <div class="listName">
+    {#if currentList}
+      <input
+        type="text"
+        class="editbox"
+        style="font-size: inherit;"
+        value={currentList.name}
+        onchange={(e) => updateListName(e.target.value)}
+        onkeydown={(e) => {
+          if (e.key === "Enter") e.target.blur();
+        }}
+      />
+
+      <ConfirmBtn title="delete list" txt2="confirm delete" warning="true" onconfirm={deleteList} />
+    {/if}
+  </div>
+</div>
+
+<section class="activeList">
+  <SortableList items={activeItems} onOrderChange={(ids) => handleItemReorder(ids, "active")}>
+    {#each activeItems as item (item.id)}
+      <div class="listItem" data-id={item.id}>
+        <div class="drag-handle"></div>
+
+        <input
+          type="checkbox"
+          checked={item.checked}
+          onchange={(e) => {
+            item.checked = e.target.checked;
+            updateItem(item);
+          }}
+        />
+
+        {#key item?.checked}
+          <input
+            type="text"
+            class="editbox"
+            bind:this={inputs[item.id]}
+            class:strike={item.checked}
+            value={item.name ?? ""}
+            onblur={(e) => {
+              if (item.name !== e.target.value) {
+                item.name = e.target.value;
+                updateItem(item);
+              }
+            }}
+            onkeydown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                createNextItem(item);
+              }
+            }}
+            placeholder="list item.."
+          />
+        {/key}
+
+        <ConfirmBtn
+          title="delete item"
+          txt2="confirm delete"
+          warning="true"
+          onconfirm={() => {
+            deleteItem(item.id);
+          }}
+        />
+      </div>
+    {/each}
+  </SortableList>
+
+  <div class="addNewItem">
+    <form
+      method="POST"
+      action="?/addItem"
+      use:enhance={({ formElement }) => {
+        return async ({ result, update }) => {
+          if (result.type === "success") {
+            const newId = result.data.id;
+            await update();
+            inputs[newId].focus();
+          }
+        };
+      }}
+    >
+      <button class="unset" type="submit">
+        <Icon name="add-sm" />
+
+        <span style="font-style: italic;">add item</span>
+      </button>
+    </form>
+  </div>
+  <!-- addNewItem -->
+</section>
+
+{#if checkedItems.length > 0}
+  <section class="checkedList">
+    <hr />
+    <SortableList items={checkedItems} onOrderChange={(ids) => handleItemReorder(ids, "checked")}>
+      {#each checkedItems as item (item.id)}
+        <div class="listItem" data-id={item.id}>
+          <div class="drag-handle"></div>
+
+          <input
+            type="checkbox"
+            checked={item.checked}
+            onchange={(e) => {
+              item.checked = e.target.checked;
+              updateItem(item);
+            }}
+          />
+          <span class="strike">{item.name}</span>
+
+          <ConfirmBtn
+            title="delete item"
+            txt2="confirm delete"
+            warning="true"
+            onconfirm={() => {
+              deleteItem(item.id);
+            }}
+          />
+        </div>
+      {/each}
+    </SortableList>
+  </section>
+{/if}
+
+<style>
+  .header {
+    .listName {
+      font-size: var(--h3);
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+  .listItem {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 4px 0;
+
+    .strike {
+      text-decoration: line-through;
+    }
+  }
+  .activeList {
+    margin-block: 1rem;
+    input[type="text"] {
+      flex: 1;
+    }
+  }
+  .checkedList {
+    margin-block: 1rem;
+    span {
+      padding: 0 1ch;
+      flex: 1;
+      color: var(--fg-muted) !important;
+    }
+    hr {
+      margin-block: 2rem;
+    }
+  }
+  .addNewItem {
+    font-size: inherit;
+    margin: 1rem 0;
+    opacity: 0.8;
+
+    span {
+      font-size: 0.875em;
+    }
+
+    button.unset {
+      display: flex;
+      align-items: center;
+      gap: 0 1ch;
+      width: fit-content;
+      padding: 0;
+    }
+  }
+</style>

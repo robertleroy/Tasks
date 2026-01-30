@@ -1,0 +1,97 @@
+/* #region Tables - January 2026 */
+
+:root {		
+  --table-bg-even: light-dark(hsl(210 30 94), hsl(0 0 10));
+  --table-bg-odd: light-dark(hsl(210 30 98), hsl(0 0 13));
+  --table-bg-header: light-dark(hsl(from var(--table-bg-even) h s calc(l - 4)), var(--table-bg-even));
+  /* --@container-query: 640px; */
+}
+:has(table) {
+  container-name: table;
+  container-type: inline-size;
+}		
+
+.placeholder {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+  height: 100%;
+  padding: 2rem 0;
+  background: var(--table-bg-even);
+}
+table {
+  box-sizing: border-box;
+  position: relative;
+  height: auto;
+  width: 100%;
+  background: var(--table-bg-even);
+  border-collapse: collapse;
+  border: 1px solid var(--border-color, #ccc);
+}
+caption {
+  text-transform: capitalize;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: hsl(from var(--table-bg-header) h s calc(l - 12));
+  font-size: 14px;
+  font-weight: 600;
+}
+tr:not(:last-child) {
+  border-bottom: 1px solid var(--border-color, #ccc);
+}
+td, th { 
+  padding: 0.5rem 1rem; 
+  vertical-align: top;
+}
+thead {
+  position: sticky;
+  top: 0;
+}
+th { 
+  text-transform: capitalize;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: left; 
+  background: var(--table-bg-header);
+  &::after { content: ":" }
+}
+tr:nth-child(odd) { background: var(--table-bg-odd); }
+tr:nth-child(even) { background: var(--table-bg-even); }
+
+@container table (width < 640px) {
+  :has([data-key]) {
+    thead { display: none; }
+    td {
+      position: relative;
+      display: grid;
+      grid-template-columns: 8ch 1fr;
+      align-items: baseline;
+      gap: 0 2rem;
+      padding: 0 1rem;
+      &::before {
+        content: attr(data-key) ": ";
+        text-transform: capitalize;
+        font-size: 12px;
+        font-weight: 500;
+        position: relative;
+        top: -2px;
+      }
+      &:first-child { padding-top: 0.5rem; }
+      &:last-child { padding-bottom: 0.5rem; }
+    }
+  }
+}
+
+/* DOCS **
+** Displays as cards on small screen - requirements..
+- td has [data-key="label"] attribute 
+- @container query targets table container
+  - turns table into display: grid
+  - aria:roles
+
+AddTableARIA: 
+  - use:action adds aria roles back to elements (display: grid)
+
+- recomend Table as a custom element
+*/
+/* #endregion Tables */
