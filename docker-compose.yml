@@ -9,7 +9,6 @@ services:
       - tasks-db:/app/data # This creates a persistent 'shelf' for your DB
     environment:
       - DATABASE_URL=file:/app/data/tasks.db
-      - ORIGIN=http://100.88.232.72:3002
       - NODE_ENV=production
 
 volumes:
