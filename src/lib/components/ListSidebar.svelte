@@ -10,11 +10,11 @@
 
     // console.log("updatedItems",updatedItems);
 
-    const payload = updatedItems.map(i => ({ id: i.id, position: i.position }));
+    // const payload = updatedItems.map(i => ({ id: i.id, position: i.position }));
 
-    // const payload = updatedItems.map((item, index) => {
-    //   return { id: item.id, position: index };
-    // });
+    const payload = updatedItems.map((item, index) => {
+      return { id: item.id, position: index };
+    });
     
 
     console.log("payload",payload);
@@ -28,6 +28,8 @@
       })
     });
 
+    lists = lists;
+
       // console.log("Nnew order sent:", payload);
 
     if (response.ok) {
@@ -38,7 +40,7 @@
   }
 </script>
 
-<SortableList items={sortedItems} onOrderChange={(ids) => handleReorder(ids)}>
+<SortableList items={lists} onOrderChange={(ids) => handleReorder(ids)}>
   {#each sortedItems as list (list.id)}
     <div class="row" data-id={list.id}>
       <div class="drag-handle">⋮⋮</div>
@@ -46,6 +48,7 @@
     </div>
   {/each}
 </SortableList>
+
 
 <style>
   .row {

@@ -10,7 +10,7 @@ export const POST = async ({ request, locals }) => {
   const { type, updates } = await request.json();
   const table = type === "lists" ? lists : listItems;
 
-  // console.log("POST", type, updates);
+  console.log("updates", type, updates);
 
   try {
     await db.transaction(async (tx) => {
@@ -19,6 +19,7 @@ export const POST = async ({ request, locals }) => {
 
         if (type === "lists") {
           dataToUpdate = { position: update.position };
+          // dataToUpdate.position = update.position;
         } else {
           if (update.activePosition !== undefined) {
             dataToUpdate.activePosition = update.activePosition;
@@ -32,6 +33,7 @@ export const POST = async ({ request, locals }) => {
         await tx.update(table).set(dataToUpdate).where(eq(table.id, update.id));
       }
     });
+
 
     return json({ success: true });
   } catch (e) {

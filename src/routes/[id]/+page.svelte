@@ -50,7 +50,10 @@
     await fetch("/api/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ type: "items", updates }),
+      body: JSON.stringify({ 
+        type: "items", 
+        updates 
+      }),
     });
   }
 
