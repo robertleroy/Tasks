@@ -104,7 +104,7 @@
 
           <div class="featurenav">
             <nav class="index">
-              <ListSidebar lists={data.lists} />
+              <ListSidebar lists={data.lists} /> 
             </nav>
           </div>
         {/if}

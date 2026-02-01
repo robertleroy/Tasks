@@ -4,7 +4,7 @@
   import Sortable from 'sortablejs';
 
   let { 
-    items = $bindable(), 
+    items, 
     children, 
     onOrderChange, 
     handle = ".drag-handle" 
@@ -34,7 +34,8 @@
 
         // 2. Update local state (triggers the $bindable)
         // items = updatedItems;
-        items = newlySortedItems;
+        // items = newlySortedItems;
+        // console.log("newlySortedItems",newlySortedItems)
     
         // 3. Inform parent to persist to DB
         // if (onOrderChange) onOrderChange(items);

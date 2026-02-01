@@ -10,6 +10,8 @@ export const POST = async ({ request, locals }) => {
   const { type, updates } = await request.json();
   const table = type === "lists" ? lists : listItems;
 
+  // console.log("POST", type, updates);
+
   try {
     await db.transaction(async (tx) => {
       for (const update of updates) {
@@ -25,6 +27,7 @@ export const POST = async ({ request, locals }) => {
             dataToUpdate.checkedPosition = update.checkedPosition;
           }
         }
+        // console.log("POST", dataToUpdate);
 
         await tx.update(table).set(dataToUpdate).where(eq(table.id, update.id));
       }

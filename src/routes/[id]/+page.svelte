@@ -34,6 +34,9 @@
   }
 
   async function handleItemReorder(orderedIds, listType) {
+
+    // console.log("orderedIds",orderedIds);
+
     const updates = orderedIds.map((item, index) => {
       if (listType === "active") {
         return { id: item.id, activePosition: index, checkedPosition: index };
@@ -41,6 +44,8 @@
         return { id: item.id, checkedPosition: index };
       }
     });
+
+    console.log("updates",updates);
 
     await fetch("/api/reorder", {
       method: "POST",

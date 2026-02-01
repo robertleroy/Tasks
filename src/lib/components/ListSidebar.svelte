@@ -7,9 +7,17 @@
   let sortedItems = $derived(lists.toSorted((a, b) => a.position - b.position));
 
   async function handleReorder(updatedItems) {
+
+    // console.log("updatedItems",updatedItems);
+
     const payload = updatedItems.map(i => ({ id: i.id, position: i.position }));
+
+    // const payload = updatedItems.map((item, index) => {
+    //   return { id: item.id, position: index };
+    // });
     
-    console.log("Sending new order to API:", payload);
+
+    console.log("payload",payload);
 
     const response = await fetch('/api/reorder', {
       method: 'POST',
@@ -20,6 +28,8 @@
       })
     });
 
+      // console.log("Nnew order sent:", payload);
+
     if (response.ok) {
         console.log("Database updated successfully");
     } else {
@@ -28,7 +38,7 @@
   }
 </script>
 
-<SortableList bind:items={lists} onOrderChange={handleReorder}>
+<SortableList items={sortedItems} onOrderChange={(ids) => handleReorder(ids)}>
   {#each sortedItems as list (list.id)}
     <div class="row" data-id={list.id}>
       <div class="drag-handle">⋮⋮</div>
