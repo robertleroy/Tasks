@@ -4,7 +4,9 @@ const config = {
 	kit: {
 		adapter: adapter(),
     csrf: {
-      checkOrigin: false
+      trustedOrigins: [
+        'http://100.88.232.72:3002'
+      ]
     }
 	},
 };

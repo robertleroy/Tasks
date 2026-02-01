@@ -2,7 +2,7 @@
 FROM node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --omit=dev
 COPY . .
 # RUN npm run build
 RUN DATABASE_URL=file:dummy.db npm run build
