@@ -12,6 +12,8 @@ npx drizzle-kit migrate   # Applies migrations to your DB
 ```
 
 
+git add . && git commit -m "Switched to migrations" 
+
 
 
 
