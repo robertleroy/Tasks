@@ -255,6 +255,9 @@
     .strike {
       text-decoration: line-through;
     }
+    [type="checkbox"] {
+      font-size: 1.125em;
+    }
   }
   .activeList {
     margin-block: 1rem;
