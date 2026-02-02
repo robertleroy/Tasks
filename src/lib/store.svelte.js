@@ -31,3 +31,75 @@ export 	let store = $state({
     },
   ],
 });
+
+
+export function swipe(node) {
+	let startX = 0, 
+			startY = 0,
+			endX = 0, 
+			endY = 0,
+			timeStart = null,
+			detail = clearDetail();
+	const swipeThreshold = 50,
+				notEnoughTime = 10,
+				timeThreshold = 300;
+	node.style.touchAction = "none";
+
+	function setTimeDown() { timeStart = Date.now(); }
+	function clearDetail() { return { pointerType: "", direction: "" }}
+	function handleSwipe(e) {
+	  let timeDiff = Date.now() - timeStart;
+	  const diffX = endX - startX;
+	  const diffY = endY - startY;
+	  timeStart = null;
+		detail.pointerType = e.pointerType;
+
+		if (timeDiff < notEnoughTime || timeDiff > timeThreshold) return;
+		if (Math.abs(diffX) < swipeThreshold && Math.abs(diffY) < swipeThreshold) return;
+		
+		if (Math.abs(diffX) > Math.abs(diffY)) {
+	    /* Horizontal swipe *********** */
+			if (diffX > 0) detail.direction = "right";
+			else detail.direction = "left";
+	  } else {
+	    /* Vertical swipe *********** */
+			if (diffY > 0) detail.direction = "down";
+			else detail.direction = "up";
+	  }
+		node.dispatchEvent(new CustomEvent("swipe", {detail}));	
+		detail = clearDetail();
+	}
+
+	$effect(() => {
+		node.addEventListener("pointerdown", (e) => {
+			startX = e.clientX;
+			startY = e.clientY;
+			setTimeDown();
+		});
+		node.addEventListener("pointerup", (e) => {
+			endX = e.clientX;
+			endY = e.clientY;
+			handleSwipe(e);
+		});
+
+		return {
+			destroy() {
+				node.removeEventListener("pointerdown", handleSwipe);
+				node.removeEventListener("pointerup", handleSwipe);
+			}
+		}
+	});
+}
+/*
+<script>  
+  import { swipe } from "$lib";
+</script>
+
+<div class="swiper" use:swipe 
+	onswipe={(e) => {
+    const {pointerType,direction} = e.detail;
+    console.log("swipe",pointerType,direction);
+  }}>Swipe Me
+</div>
+
+*/

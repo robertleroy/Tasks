@@ -6,11 +6,7 @@
   --sidebar-width: 260px;
   --max-page-width: 640px;
   --pad: 1rem;
-  --font-size: 18px;
 
-  @media (min-width: 600px) {
-    --font-size: 16px;
-  }
 }
 
 .app {
@@ -35,7 +31,7 @@ header {
 
   .titlebar {
     display: flex;
-    gap: 0 1ch;
+    gap: 0 2ch;
     height: 100%;
     align-items: center;
     padding: 0 var(--pad);
@@ -80,6 +76,8 @@ aside {
     padding: var(--pad);
   }
 
+  
+
   .addListPanel {
     width: fit-content;
     margin: 0 0 1rem;
@@ -104,10 +102,10 @@ aside {
       min-width: 4rem;
     }
 
-    input,
+    /* input,
     button {
       font-size: 13px;
-    }
+    } */
   }
 
   .addNewListBtn {
@@ -139,6 +137,7 @@ section.router {
     background-color: var(--bg);
     height: 100%;
     max-width: var(--max-page-width);
+    min-width: 320px;
     margin: 0 auto;
   }
 }
@@ -219,14 +218,15 @@ footer {
 }
 
 .drag-handle {
-  position: relative;
+  /* position: relative; */
   cursor: default;
   height: 1.5rem;
   width: 1.5rem;
   display: inline flow-root;
   text-align: center;
   color: hsl(from currentColor h s l / 0.75);
-
+  display: grid;
+  place-items: center;
   /* &::before {
     position: absolute;
     top: 0;
@@ -246,6 +246,8 @@ input[type="text"].editbox {
   border-radius: 0;
   outline: unset;
   background: unset;
+  font-size: inherit;
+  min-width: 4rem;
 
   &:focus {
     box-shadow: 0 1px 0px 0 var(--fg-muted);

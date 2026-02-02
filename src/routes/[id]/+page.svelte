@@ -114,7 +114,6 @@
       <input
         type="text"
         class="editbox"
-        style="font-size: inherit;"
         value={currentList.name}
         onchange={(e) => updateListName(e.target.value)}
         onkeydown={(e) => {
@@ -122,7 +121,7 @@
         }}
       />
 
-      <ConfirmBtn title="delete list" txt2="confirm delete" warning="true" onconfirm={deleteList} />
+      <ConfirmBtn title="delete list" txt2="delete" warning="true" onconfirm={deleteList} />
     {/if}
   </div>
 </div>
@@ -169,7 +168,7 @@
 
         <ConfirmBtn
           title="delete item"
-          txt2="confirm delete"
+          txt2="delete"
           warning="true"
           onconfirm={() => {
             deleteItem(item.id);
@@ -225,7 +224,7 @@
 
           <ConfirmBtn
             title="delete item"
-            txt2="confirm delete"
+            txt2="delete"
             warning="true"
             onconfirm={() => {
               deleteItem(item.id);
@@ -244,11 +243,15 @@
       margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
+
+      input.editbox {
+        font-size: inherit;
+      }
     }
   }
   .listItem {
     display: flex;
-    gap: 10px;
+    gap: 0.25rem;
     align-items: center;
     padding: 4px 0;
 
@@ -256,7 +259,13 @@
       text-decoration: line-through;
     }
     [type="checkbox"] {
-      font-size: 1.125em;
+      /* font-size: 1.25em; */
+      --cb-size: 1.125rem;
+      &::before, &::after {
+        /* top: 0.25em; */
+        top: 0.1875em;
+      }
+      
     }
   }
   .activeList {

@@ -1,5 +1,5 @@
 <script>
-  import { onMount, tick, page, dev, enhance, invalidateAll, goto, config, store, clickOutside } from "$lib";
+  import { onMount, tick, page, dev, enhance, invalidateAll, goto, config, store, clickOutside, swipe } from "$lib";
   import { dev_icon, favicon, circles } from "$lib/assets";
   import { ConfirmBtn, Icon, ListSidebar } from "$lib/components";
   import "./app.css";
@@ -95,13 +95,40 @@
     </div>
   </header>
 
-  <main>
+  <main use:swipe
+    onswipe={(e) => {
+    const {pointerType,direction} = e.detail;
+    // console.log("swipe",pointerType,direction);
+
+    if (appWidth < 600) {
+      if (direction === "right" && showSidebar === false) {
+        showSidebar = true
+      } else if (direction === "left" && showSidebar === true) {
+        showSidebar = false
+      }
+    }
+  }}>
     <aside class:hideSidebar={!showSidebar}>
       <div class="sidebar">
         {#if data?.user}
-          <a href="/#newListName" class="unset addNewListBtn" title="new list..">
+
+          <button class="addNewListBtn link"
+            onclick={async () => {
+              goto("/#newListName");
+              console.log("One");
+              await tick();
+              showSidebar=false;
+              console.log("Two");
+          }}>
             <Icon name="add" />
-          </a>
+          </button>
+          <!-- <a href="/#newListName" class="unset addNewListBtn" title="new list.."
+          onclick={() => {
+            showSidebar=false;
+            console.log("Clicked");
+          }}>
+            <Icon name="add" />
+          </a> -->
 
           <div class="featurenav">
             <nav class="index">

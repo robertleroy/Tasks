@@ -36,6 +36,6 @@ The app is a multilist tasks app (checklists)
 <br>
 
 ```sh
-git add . && git commit -m "Fix #2 for list reorder"
+git add . && git commit -m "Added swipe, enlarger checkboxes, adujusted showSidebar calls, etc"
 git push
 ```

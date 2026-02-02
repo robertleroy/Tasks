@@ -81,7 +81,7 @@
   .placeholder {
     color: var(--fg-muted);
     font-style: italic;
-    margin: 4rem;
+    margin: 2rem 0;
     width: fit-content;
   }
 </style>
