@@ -30,7 +30,7 @@
    {#if pending}
    {txt2}
    {:else}
-   <Icon name="cancel_sm" />
+   <Icon name="cancel-md" />
    {/if}
 </button>
 

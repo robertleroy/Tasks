@@ -39,7 +39,7 @@
 <SortableList items={lists} onOrderChange={(ids) => handleReorder(ids)}>
   {#each sortedItems as list (list.id)}
     <div class="row" data-id={list.id}>
-      <div class="drag-handle"><Icon name="drag-handle-sm"/></div>
+      <div class="drag-handle"><Icon name="drag-handle-md"/></div>
       <a href="/{list.id}"
         onclick={onnav}>{list.name}</a>
     </div>

@@ -225,6 +225,7 @@ footer {
   width: 1.5rem;
   display: inline flow-root;
   text-align: center;
+  color: hsl(from currentColor h s l / 0.75);
 
   /* &::before {
     position: absolute;
