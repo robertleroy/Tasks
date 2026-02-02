@@ -36,6 +36,6 @@ The app is a multilist tasks app (checklists)
 <br>
 
 ```sh
-git add . && git commit -m "Fixe reorder persistance for lists"
+git add . && git commit -m "Fix #2 for list reorder"
 git push
 ```

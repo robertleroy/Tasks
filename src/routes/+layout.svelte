@@ -44,7 +44,7 @@
 <svelte:head>
   <title>{config.appname}{dev ? " : dev" : ""}</title>
   {#key store.darkmode}
-    <link rel="icon" href={dev ? favicon : dev_icon} />
+    <link rel="icon" href={dev ? dev_icon : favicon} />
   {/key}
 </svelte:head>
 
@@ -60,7 +60,8 @@
               showSidebar = !showSidebar;
             }}
           >
-            <Icon name="squares" />
+            <Icon name="menu_2" />
+            <!-- <Icon name="squares" /> -->
           </button>
 
           <div class="brand">
@@ -104,7 +105,12 @@
 
           <div class="featurenav">
             <nav class="index">
-              <ListSidebar lists={data.lists} /> 
+              <ListSidebar lists={data.lists} 
+                onnav={() => {
+                  if (appWidth < 600) {
+                    showSidebar=false;
+                  }
+                }}/> 
             </nav>
           </div>
         {/if}

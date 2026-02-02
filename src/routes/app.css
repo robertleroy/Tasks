@@ -6,6 +6,11 @@
   --sidebar-width: 260px;
   --max-page-width: 640px;
   --pad: 1rem;
+  --font-size: 18px;
+
+  @media (min-width: 600px) {
+    --font-size: 16px;
+  }
 }
 
 .app {
@@ -221,14 +226,14 @@ footer {
   display: inline flow-root;
   text-align: center;
 
-  &::before {
+  /* &::before {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     content: "⋮⋮";
-  }
+  } */
 }
 
 .sortable-container {

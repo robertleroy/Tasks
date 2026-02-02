@@ -131,7 +131,9 @@
   <SortableList items={activeItems} onOrderChange={(ids) => handleItemReorder(ids, "active")}>
     {#each activeItems as item (item.id)}
       <div class="listItem" data-id={item.id}>
-        <div class="drag-handle"></div>
+        <div class="drag-handle">
+          <Icon name="drag-handle-sm"/>
+        </div>
 
         <input
           type="checkbox"
@@ -207,7 +209,9 @@
     <SortableList items={checkedItems} onOrderChange={(ids) => handleItemReorder(ids, "checked")}>
       {#each checkedItems as item (item.id)}
         <div class="listItem" data-id={item.id}>
-          <div class="drag-handle"></div>
+          <div class="drag-handle">
+            <Icon name="drag-handle-sm"/>
+          </div>
 
           <input
             type="checkbox"

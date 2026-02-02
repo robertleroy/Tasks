@@ -1,5 +1,6 @@
 <script>
-  let { txt1="🗙", txt2="🗙", warning=false, onconfirm, ...attr } = $props();
+  import { Icon } from "$lib/components";
+  let { txt1=null, txt2="🗙", warning=false, onconfirm, ...attr } = $props();
   let pending = $state(false);
 
 
@@ -25,7 +26,12 @@
 		pending = !pending;
 	}}
 	onoutclick={() => pending = false}>
-  {pending ? txt2 : txt1}
+  <!-- {pending ? txt2 : txt1} -->
+   {#if pending}
+   {txt2}
+   {:else}
+   <Icon name="cancel_sm" />
+   {/if}
 </button>
 
 <style>

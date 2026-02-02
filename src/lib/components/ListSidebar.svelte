@@ -2,15 +2,11 @@
   import { SortableList } from '$lib/components';
   import Icon from './Icon.svelte';
   
-  let { lists=[], detailPath="/" } = $props();
+  let { lists=[], detailPath="/", onnav } = $props();
 
   let sortedItems = $derived(lists.toSorted((a, b) => a.position - b.position));
 
   async function handleReorder(updatedItems) {
-
-    // console.log("updatedItems",updatedItems);
-
-    // const payload = updatedItems.map(i => ({ id: i.id, position: i.position }));
 
     const payload = updatedItems.map((item, index) => {
       return { id: item.id, position: index };
@@ -43,8 +39,9 @@
 <SortableList items={lists} onOrderChange={(ids) => handleReorder(ids)}>
   {#each sortedItems as list (list.id)}
     <div class="row" data-id={list.id}>
-      <div class="drag-handle">⋮⋮</div>
-      <a href="/{list.id}">{list.name}</a>
+      <div class="drag-handle"><Icon name="drag-handle-sm"/></div>
+      <a href="/{list.id}"
+        onclick={onnav}>{list.name}</a>
     </div>
   {/each}
 </SortableList>

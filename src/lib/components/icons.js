@@ -44,7 +44,7 @@ export const icons = [
     size: "1.5em",
   },
   {
-    tags: ["cancel_sm"],
+    tags: ["cancel_sm","cancel-sm"],
     viewbox: "0 0 16 16",
     vectors: `<path d="M 4.7,3.3 3.3,4.7 6.6,8 3.3,11.3 4.7,12.7 8,9.4 11.3,12.7 12.7,11.3 9.4,8 12.7,4.7 11.3,3.3 8,6.6 Z"/>`,
     size: "1em",
