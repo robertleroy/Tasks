@@ -121,13 +121,6 @@
           }}>
             <Icon name="add" />
           </button>
-          <!-- <a href="/#newListName" class="unset addNewListBtn" title="new list.."
-          onclick={() => {
-            showSidebar=false;
-            console.log("Clicked");
-          }}>
-            <Icon name="add" />
-          </a> -->
 
           <div class="featurenav">
             <nav class="index">

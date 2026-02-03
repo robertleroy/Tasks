@@ -20,5 +20,13 @@
     /* color-scheme: dark; */
     /* color-scheme: light; */
   }
+
+  @media (max-width: 640px) and 
+    (orientation: portrait) and 
+    (min-resolution: 2dppx) {
+    :root {
+      --font-size: 18px; /* or whatever works for phone */
+    }
+  }
 }
 /* #endregion Base */

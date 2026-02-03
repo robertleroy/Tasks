@@ -34,7 +34,6 @@
   }
 
   async function handleItemReorder(orderedIds, listType) {
-
     // console.log("orderedIds",orderedIds);
 
     const updates = orderedIds.map((item, index) => {
@@ -45,14 +44,14 @@
       }
     });
 
-    console.log("updates",updates);
+    console.log("updates", updates);
 
     await fetch("/api/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        type: "items", 
-        updates 
+      body: JSON.stringify({
+        type: "items",
+        updates,
       }),
     });
   }
@@ -131,7 +130,7 @@
     {#each activeItems as item (item.id)}
       <div class="listItem" data-id={item.id}>
         <div class="drag-handle">
-          <Icon name="drag-handle-md"/>
+          <Icon name="drag-handle-md" />
         </div>
 
         <input
@@ -150,7 +149,7 @@
             bind:this={inputs[item.id]}
             class:strike={item.checked}
             value={item.name ?? ""}
-            onblur={(e) => {
+            onchange={(e) => {
               if (item.name !== e.target.value) {
                 item.name = e.target.value;
                 updateItem(item);
@@ -199,7 +198,6 @@
       </button>
     </form>
   </div>
-  <!-- addNewItem -->
 </section>
 
 {#if checkedItems.length > 0}
@@ -209,7 +207,7 @@
       {#each checkedItems as item (item.id)}
         <div class="listItem" data-id={item.id}>
           <div class="drag-handle">
-            <Icon name="drag-handle-md"/>
+            <Icon name="drag-handle-md" />
           </div>
 
           <input
@@ -261,11 +259,11 @@
     [type="checkbox"] {
       /* font-size: 1.25em; */
       --cb-size: 1.125rem;
-      &::before, &::after {
+      &::before,
+      &::after {
         /* top: 0.25em; */
         top: 0.1875em;
       }
-      
     }
   }
   .activeList {
