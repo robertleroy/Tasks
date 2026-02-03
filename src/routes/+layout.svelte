@@ -95,11 +95,10 @@
     </div>
   </header>
 
-  <main use:swipe
+  <main >
+    <!-- use:swipe
     onswipe={(e) => {
     const {pointerType,direction} = e.detail;
-    // console.log("swipe",pointerType,direction);
-
     if (appWidth < 600) {
       if (direction === "right" && showSidebar === false) {
         showSidebar = true
@@ -107,7 +106,8 @@
         showSidebar = false
       }
     }
-  }}>
+  }}
+  > -->
     <aside class:hideSidebar={!showSidebar}>
       <div class="sidebar">
         {#if data?.user}
@@ -122,13 +122,6 @@
           }}>
             <Icon name="add" />
           </button>
-          <!-- <a href="/#newListName" class="unset addNewListBtn" title="new list.."
-          onclick={() => {
-            showSidebar=false;
-            console.log("Clicked");
-          }}>
-            <Icon name="add" />
-          </a> -->
 
           <div class="featurenav">
             <nav class="index">
