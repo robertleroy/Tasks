@@ -133,7 +133,7 @@
     {#each activeItems as item (item.id)}
       <div class="listItem" data-id={item.id}>
         <div class="drag-handle">
-          <Icon name="drag-handle" />
+          <Icon name="drag-handle-md" />
         </div>
 
         <input
@@ -210,7 +210,7 @@
       {#each checkedItems as item (item.id)}
         <div class="listItem" data-id={item.id}>
           <div class="drag-handle">
-            <Icon name="drag-handle" />
+            <Icon name="drag-handle-md" />
           </div>
 
           <input

@@ -36,6 +36,6 @@ The app is a multilist tasks app (checklists)
 <br>
 
 ```sh
-git add . && git commit -m "--sidebar-width: 100% at small screen"
+git add . && git commit -m "update"
 git push
 ```
