@@ -28,7 +28,7 @@
 	onoutclick={() => pending = false}>
   <!-- {pending ? txt2 : txt1} -->
    {#if pending}
-   {txt2}
+   <div class="txt2">{txt2}</div>
    {:else}
    <Icon name="cancel-md" />
    {/if}
@@ -40,6 +40,10 @@
 		text-shadow: 0 0 12px hsl(from tomato h s l / 0.3);
     box-shadow: none;
 	}
+  .txt2 {
+    font-size: 0.9375em;
+    font-style: italic;
+  }
 </style>
 
 <!-- 

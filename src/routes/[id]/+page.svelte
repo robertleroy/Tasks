@@ -120,7 +120,10 @@
         }}
       />
 
-      <ConfirmBtn title="delete list" txt2="delete" warning="true" onconfirm={deleteList} />
+      <div style="font-size: 1rem;">
+        <ConfirmBtn title="delete list" txt2="delete list" warning="true" onconfirm={deleteList} />        
+      </div>
+
     {/if}
   </div>
 </div>
@@ -167,7 +170,7 @@
 
         <ConfirmBtn
           title="delete item"
-          txt2="delete"
+          txt2="delete item"
           warning="true"
           onconfirm={() => {
             deleteItem(item.id);
@@ -222,7 +225,7 @@
 
           <ConfirmBtn
             title="delete item"
-            txt2="delete"
+            txt2="delete item"
             warning="true"
             onconfirm={() => {
               deleteItem(item.id);

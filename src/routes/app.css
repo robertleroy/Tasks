@@ -3,10 +3,13 @@
 :root {
   --header-height: 3rem;
   --max-app-width: 1400px;
-  --sidebar-width: 260px;
+  --sidebar-width: 100%;
   --max-page-width: 640px;
   --pad: 1rem;
 
+  @media (min-width: 500px) {    
+    --sidebar-width: 260px;
+  }
 }
 
 
