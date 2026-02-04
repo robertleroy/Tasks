@@ -1,11 +1,13 @@
 <script>
-  import { tick, enhance, invalidateAll, goto } from "$lib";
+  import { invalidate } from '$app/navigation';
+  import { onMount , tick, enhance, invalidateAll, goto } from "$lib";
   import { SortableList, ConfirmBtn, Icon } from "$lib/components";
 
   let { data } = $props();
   let inputs = $state({});
   let isAdding = $state(false);
   let currentList = $derived(data?.list);
+  let addNewItemForm = $state();
 
   let activeItems = $derived(data.items.filter((item) => !item.checked).toSorted((a, b) => a.activePosition - b.activePosition));
 
@@ -33,10 +35,9 @@
     await invalidateAll();
   }
 
-  async function handleItemReorder(orderedIds, listType) {
-    // console.log("orderedIds",orderedIds);
+  async function handleItemOrderChange(updatedItems, listType) {
 
-    const updates = orderedIds.map((item, index) => {
+    const updates = updatedItems.map((item, index) => {
       if (listType === "active") {
         return { id: item.id, activePosition: index, checkedPosition: index };
       } else {
@@ -44,9 +45,8 @@
       }
     });
 
-    console.log("updates", updates);
 
-    await fetch("/api/reorder", {
+    const response = await fetch("/api/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -54,6 +54,14 @@
         updates,
       }),
     });
+  
+
+    if (response.ok) {
+      await invalidateAll(); 
+      console.log("Database updated successfully");
+    } else {
+      console.error("Database update failed");
+    }
   }
 
   async function createNextItem(currentItem) {
@@ -81,8 +89,6 @@
 
   async function updateListName(newName) {
     // Only update if the name actually changed
-    // console.log(e.target.value);
-    // if (currentList === e.target.value) return;
 
     const res = await fetch("/api/lists", {
       method: "PATCH",
@@ -105,6 +111,14 @@
 
     if (res.ok) goto("/");
   }
+
+  onMount(async () => {
+    
+    if (data?.items.length === 0) {
+      addNewItemForm.requestSubmit();
+
+    }
+  });
 </script>
 
 <div class="header">
@@ -129,7 +143,7 @@
 </div>
 
 <section class="activeList">
-  <SortableList items={activeItems} onOrderChange={(ids) => handleItemReorder(ids, "active")}>
+  <SortableList items={activeItems} onOrderChange={(ids) => handleItemOrderChange(ids, "active")}>
     {#each activeItems as item (item.id)}
       <div class="listItem" data-id={item.id}>
         <div class="drag-handle">
@@ -182,6 +196,7 @@
 
   <div class="addNewItem">
     <form
+      bind:this={addNewItemForm}
       method="POST"
       action="?/addItem"
       use:enhance={({ formElement }) => {
@@ -206,7 +221,7 @@
 {#if checkedItems.length > 0}
   <section class="checkedList">
     <hr />
-    <SortableList items={checkedItems} onOrderChange={(ids) => handleItemReorder(ids, "checked")}>
+    <SortableList items={checkedItems} onOrderChange={(ids) => handleItemOrderChange(ids, "checked")}>
       {#each checkedItems as item (item.id)}
         <div class="listItem" data-id={item.id}>
           <div class="drag-handle">

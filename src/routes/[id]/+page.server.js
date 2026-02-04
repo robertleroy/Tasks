@@ -31,9 +31,10 @@ export const actions = {
     const user = locals.user;
     if (!user) return fail(401);
     const listId = params.id;
+    // let newposition = listId ?
 
     try {
-      // Find the highest current position for items in this list
+      // Find the highest current position for items in this list   
       const result = await db
         .select({ maxPos: sql`max(${listItems.activePosition})` })
         .from(listItems)
@@ -51,6 +52,7 @@ export const actions = {
         checkedPosition: nextPosition,
         checked: false,
       });
+
 
       return { success: true, id };
     } catch (err) {

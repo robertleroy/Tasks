@@ -21,9 +21,9 @@
     /* color-scheme: light; */
   }
 
-  @media (max-width: 640px) and 
+  @media (max-width: 600px) and 
     (orientation: portrait) and 
-    (min-resolution: 2dppx) {
+    (hover: none) {
     :root {
       --font-size: 18px; /* or whatever works for phone */
     }

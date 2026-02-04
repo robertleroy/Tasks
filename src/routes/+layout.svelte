@@ -114,10 +114,8 @@
           <button class="addNewListBtn link"
             onclick={async () => {
               goto("/#newListName");
-              console.log("One");
               await tick();
               showSidebar=false;
-              console.log("Two");
           }}>
             <Icon name="add" />
           </button>

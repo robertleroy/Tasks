@@ -18,7 +18,6 @@
           return async ({ result, update }) => {
             if (result.type === "success") {
               const id = result.data.id;
-
               await goto(`/${id}`);
             }
             update();
