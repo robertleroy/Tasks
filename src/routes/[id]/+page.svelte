@@ -1,7 +1,9 @@
 <script>
   import { invalidate } from '$app/navigation';
-  import { onMount , tick, enhance, invalidateAll, goto } from "$lib";
+  import { onMount , tick, enhance, invalidateAll, goto, store } from "$lib";
   import { SortableList, ConfirmBtn, Icon } from "$lib/components";
+  import { crossfade, fade, slide } from 'svelte/transition';
+  import { afterNavigate } from '$app/navigation';
 
   let { data } = $props();
   let inputs = $state({});
@@ -142,10 +144,12 @@
   </div>
 </div>
 
+
 <section class="activeList">
   <SortableList items={activeItems} onOrderChange={(ids) => handleItemOrderChange(ids, "active")}>
     {#each activeItems as item (item.id)}
-      <div class="listItem" data-id={item.id}>
+      <div class="listItem" data-id={item.id}
+        transition:slide={{ duration: store.listChange ? 0 : 300 }}>
         <div class="drag-handle">
           <Icon name="drag-handle-md" />
         </div>
@@ -223,7 +227,8 @@
     <hr />
     <SortableList items={checkedItems} onOrderChange={(ids) => handleItemOrderChange(ids, "checked")}>
       {#each checkedItems as item (item.id)}
-        <div class="listItem" data-id={item.id}>
+        <div class="listItem" data-id={item.id}
+          transition:slide={{ duration: store.listChange ? 0 : 300 }}>
           <div class="drag-handle">
             <Icon name="drag-handle-md" />
           </div>

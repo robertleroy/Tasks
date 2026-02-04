@@ -1,7 +1,7 @@
 <script>
   import { onMount, tick, page, dev, enhance, invalidateAll, goto, config, store, clickOutside, swipe } from "$lib";
   import { dev_icon, favicon, circles } from "$lib/assets";
-  import { ConfirmBtn, Icon, ListSidebar } from "$lib/components";
+  import { ConfirmBtn, Icon, ListSidebar, MenuToggle } from "$lib/components";
   import "./app.css";
 
   let { data, children } = $props();
@@ -60,8 +60,7 @@
               showSidebar = !showSidebar;
             }}
           >
-            <Icon name="menu_2" />
-            <!-- <Icon name="squares" /> -->
+            <MenuToggle toggled={showSidebar} />
           </button>
 
           <div class="brand">
@@ -115,7 +114,9 @@
             onclick={async () => {
               goto("/#newListName");
               await tick();
-              showSidebar=false;
+              if (appWidth < 600 && showSidebar === true) {
+                showSidebar=false;
+              }              
           }}>
             <Icon name="add" />
           </button>

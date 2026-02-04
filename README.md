@@ -36,6 +36,6 @@ The app is a multilist tasks app (checklists)
 <br>
 
 ```sh
-git add . && git commit -m "update"
+git add . && git commit -m "added transition:slide to listItems (suoressed accordion effect onListChange)"
 git push
 ```

@@ -1,6 +1,8 @@
 <script>
   import { SortableList } from '$lib/components';
+  import { slide } from 'svelte/transition';
   import Icon from './Icon.svelte';
+  import { store } from "$lib";
   
   let { lists=[], detailPath="/", onnav } = $props();
 
@@ -33,10 +35,15 @@
 
 <SortableList items={lists} onOrderChange={(ids) => handleListOrderChange(ids)}>
   {#each sortedItems as list (list.id)}
-    <div class="row" data-id={list.id}>
+    <div class="row" data-id={list.id}
+      transition:slide>
       <div class="drag-handle"><Icon name="drag-handle-md"/></div>
       <a href="/{list.id}"
-        onclick={onnav}>{list.name}</a>
+        onclick={() => {
+          store.listChange = true;
+          setTimeout(() => store.listChange = false, 50);
+          onnav();
+        }}>{list.name}</a>
     </div>
   {/each}
 </SortableList>

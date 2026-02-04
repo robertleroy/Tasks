@@ -191,6 +191,7 @@
         }
       }
     }
+    
 
     .row {
       display: flex;
@@ -209,8 +210,10 @@
     anchor-name: --anchor_edit;
     display: grid;
     place-items: center;
-    font-size: 0.75rem;
     height: 1.5rem;
+    width: 1.5rem;
+    font-size: inherit;
+    padding: 0;
   }
 
   .panel {
