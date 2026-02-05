@@ -30,7 +30,7 @@ header {
     height: 100%;
     align-items: center;
     max-width: var(--max-app-width);
-    padding-right: var(--pad);
+    padding-right: 1.25em;
   }
 
   .titlebar {
@@ -70,6 +70,7 @@ main {
 
 aside {
   background-color: var(--bg-panel);
+  /* border-right: var(--border); */
   border-right: var(--border);
   width: var(--sidebar-width);
   transition: width 300ms;
@@ -178,7 +179,10 @@ footer {
 }
 
 #settings_anchor {
-  anchor-name: --settings_anchor;
+  anchor-name: --settings_anchor;  
+  display: grid;
+  place-items: center; 
+  font-size: 0.75em;
 }
 
 #settings_target {

@@ -132,7 +132,7 @@
         value={currentList.name}
         onchange={(e) => updateListName(e.target.value)}
         onkeydown={(e) => {
-          if (e.key === "Enter") e.target.blur();
+          if (e.key === "Enter" && !event.shiftKey) e.target.blur();
         }}
       />
 
@@ -177,7 +177,7 @@
               }
             }}
             onkeydown={(e) => {
-              if (e.key === "Enter") {
+              if (e.key === "Enter" && !event.shiftKey) {
                 e.preventDefault();
                 createNextItem(item);
               }
@@ -273,7 +273,8 @@
   .listItem {
     display: flex;
     gap: 0.25rem;
-    align-items: center;
+    align-items: start;
+    /* align-items: center; */
     padding: 4px 0;
 
     .strike {

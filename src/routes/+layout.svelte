@@ -36,7 +36,10 @@
     const exp = 60 * 60 * 24 * 365; /*** 1yr ***/
     const val = isDark ? "dark" : "light";
 
-    document.cookie = `${config.cookieNames.theme}=${val}; max-age=${exp}; path=/; SameSite=Strict`;
+    document.cookie = `${config.cookieNames.theme}=${val}; max-age=${exp}; path=/; 
+    secure=true,
+    httpOnly=true,
+    SameSite=lax`;
     document.documentElement.dataset.theme = val;
   }
 </script>
@@ -82,9 +85,6 @@
             class="unset"
             title="settings"
             id="settings_anchor"
-            style="display: grid;
-              place-items: center; 
-              font-size: 0.75em;"
             popovertarget="settings_target"
           >
             <Icon name="settings" />
@@ -158,6 +158,9 @@
       href="/account"
       class="unset"
       onclick={() => {
+        if (appWidth < 600 && showSidebar === true) {
+          showSidebar = false;
+        }
         const settings_target = document.getElementById("settings_target");
         settings_target.hidePopover();
       }}>account</a

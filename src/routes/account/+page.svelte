@@ -173,6 +173,7 @@
   </form>
 {/snippet}
 
+
 <style>
   .personal_data {
     width: clamp(20rem, 100%, 24rem);
@@ -189,6 +190,9 @@
         &::after {
           content: ":";
         }
+      }
+      .val {
+        font-size: 1.125rem;
       }
     }
     
