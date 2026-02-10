@@ -136,7 +136,7 @@
         }}
       />
 
-      <div style="font-size: 1rem;">
+      <div class="titlecancelbtn">
         <ConfirmBtn title="delete list" txt2="delete list" warning="true" onconfirm={deleteList} />        
       </div>
 
@@ -264,16 +264,30 @@
       margin-bottom: 1.5rem;
       display: flex;
       justify-content: space-between;
-
-      input.editbox {
-        font-size: inherit;
+      align-items: end;
+      line-height: 1.3125;
+      
+      input {
+        font-weight: 600;
+        height: unset;        
+        padding: unset;
       }
+
+      .titlecancelbtn {
+        display: grid;
+        place-items: center;
+        font-size: 1rem;
+      }
+
+      /* input.editbox {
+        font-size: inherit;
+      } */       
     }
   }
   .listItem {
     display: flex;
     gap: 0.25rem;
-    align-items: start;
+    align-items: center;
     /* align-items: center; */
     padding: 4px 0;
 
