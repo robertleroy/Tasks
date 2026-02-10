@@ -277,6 +277,7 @@
         display: grid;
         place-items: center;
         font-size: 1rem;
+        height: 1.25em;
       }
 
       /* input.editbox {
