@@ -16,8 +16,10 @@ services:
     ports:
       - "3002:443"  # HTTPS on host 3002 -> container 443
     volumes:
-      - ./Caddyfile:/etc/caddy/Caddyfile
-      - /home/username/certs:/certs:ro  # ro = read only
+      # - ./Caddyfile:/etc/caddy/Caddyfile
+      # - /home/roble/certs:/certs:ro  # ro = read only
+    - /home/roble/caddy/Caddyfile:/etc/caddy/Caddyfile
+    - /home/roble/certs:/certs:ro
     restart: always
     depends_on:
       - tasks-app
