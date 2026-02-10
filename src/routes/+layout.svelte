@@ -41,7 +41,7 @@
     const val = isDark ? "dark" : "light";
 
     document.cookie = `${config.cookieNames.theme}=${val}; max-age=${exp}; path=/; 
-    secure=true,
+    secure=false,
     httpOnly=true,
     SameSite=lax`;
     document.documentElement.dataset.theme = val;
