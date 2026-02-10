@@ -156,7 +156,8 @@
     </div>
   </footer>
 
-  <!-- #region Settings Popover -->
+  <!-- #region Settings Popover -->   
+  {#if data?.user}
   <div id="settings_target" popover>
     <a
       href="/account"
@@ -187,7 +188,7 @@
       action="/?/logout"
       use:enhance={() => {
         return async ({ result, update }) => {
-          const username = data.user.username;
+          const username = data.user?.username;
           if (result.type === "success" && result.data?.loggedout) {
             store.notice = `logged out: ${username}`;
           }
@@ -201,9 +202,9 @@
         log out </button>
     </form>
   </div>
+  {/if}
   <!-- #endregion Settings Popover -->
 </div>
-
 <!-- app -->
 
 <style>

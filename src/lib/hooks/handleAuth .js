@@ -19,11 +19,21 @@ export const handleAuth = async ({ event, resolve }) => {
   const { session, user } = await auth.validateSessionToken(sessionToken);
   if (session) {
     auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
+    event.locals.user = user;
+    event.locals.session = session;
+    return resolve(event);
   } else {
     auth.deleteSessionTokenCookie(event);
+    event.locals.user = null;
+      event.locals.session = null;
+      if (pathname !== "/auth") {
+        throw redirect(303, "/auth");
+      }
+    return resolve(event);
   }
   
-  event.locals.user = user;
-  event.locals.session = session;
-  return resolve(event);
+  // event.locals.user = user;
+  // event.locals.session = session;
+  // return resolve(event);
 };
+
