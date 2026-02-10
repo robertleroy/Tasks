@@ -1,5 +1,9 @@
 <script>
-  import { onMount, tick, page, dev, enhance, invalidateAll, goto, config, store, clickOutside, swipe } from "$lib";
+  import { 
+    onMount, tick, page, dev, 
+    enhance, invalidateAll, goto, 
+    config, store, clickOutside, swipe 
+  } from "$lib";
   import { dev_icon, favicon, circles } from "$lib/assets";
   import { ConfirmBtn, Icon, ListSidebar, MenuToggle } from "$lib/components";
   import "./app.css";
@@ -37,7 +41,7 @@
     const val = isDark ? "dark" : "light";
 
     document.cookie = `${config.cookieNames.theme}=${val}; max-age=${exp}; path=/; 
-    secure=false,
+    secure=true,
     httpOnly=true,
     SameSite=lax`;
     document.documentElement.dataset.theme = val;
@@ -182,8 +186,6 @@
       method="POST"
       action="/?/logout"
       use:enhance={() => {
-        const user_target = document.getElementById("settings_target");
-        user_target.hidePopover();
         return async ({ result, update }) => {
           const username = data.user.username;
           if (result.type === "success" && result.data?.loggedout) {
@@ -193,7 +195,10 @@
         };
       }}
     >
-      <button class="unset"> log out </button>
+      <button class="unset"
+        popovertarget="settings_target"
+        popovertargetaction="hide"> 
+        log out </button>
     </form>
   </div>
   <!-- #endregion Settings Popover -->

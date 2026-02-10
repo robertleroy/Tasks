@@ -21,7 +21,7 @@
 }
 
 header {
-  top: 0;
+  /* top: 0; */
   background-color: var(--bg-panel);
   border-bottom: var(--border);
 
@@ -208,7 +208,7 @@ footer {
     background: inherit;
     color: inherit;
 
-    &:not(:hover:not(:active)) {
+    &:hover:not(:active) {
       text-decoration: underline;
     }
   }

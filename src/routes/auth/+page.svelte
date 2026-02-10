@@ -63,7 +63,7 @@
     gap: 0 1rem;
     margin: 0 0 1.5rem;
     .h1 {
-      font-weight: bold;
+      font-weight: 600;
     }
     .subtitle {
       /* color: var(--fg-muted); */
