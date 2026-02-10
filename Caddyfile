@@ -1,0 +1,6 @@
+cisco.tailef5bcf.ts.net {
+    tls /certs/cisco.tailef5bcf.ts.net.crt /certs/cisco.tailef5bcf.ts.net.key
+    reverse_proxy tasks-app:3000
+}
+
+

@@ -5,10 +5,13 @@ const config = {
 		adapter: adapter(),
     csrf: {
       trustedOrigins: [
-        'http://100.88.232.72:3002'
+        'https://cisco.tailef5bcf.ts.net'
       ]
     },    
 	},
 };
 
 export default config;
+
+
+        // 'http://100.88.232.72:3002'

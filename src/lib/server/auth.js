@@ -102,7 +102,7 @@ export function setSessionTokenCookie(event, token, expiresAt) {
 	event.cookies.set(config.cookieNames.session, token, { 
 		expires: expiresAt,  // unset is per session
 		path: '/',
-    secure: false,
+    secure: process.env.NODE_ENV === 'production',
     httpOnly: true,
     sameSite: "lax",
   });

@@ -40,9 +40,10 @@
     const exp = 60 * 60 * 24 * 365; /*** 1yr ***/
     const val = isDark ? "dark" : "light";
 
-    document.cookie = `${config.cookieNames.theme}=${val}; max-age=${exp}; path=/; 
-    secure=false,
-    httpOnly=true,
+    document.cookie = `${config.cookieNames.theme}=${val}; 
+    max-age=${exp}; 
+    path=/; 
+    secure;
     SameSite=lax`;
     document.documentElement.dataset.theme = val;
   }
