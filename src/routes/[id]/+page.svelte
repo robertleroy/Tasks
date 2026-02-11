@@ -213,7 +213,7 @@
         };
       }}
     >
-      <button class="unset" type="submit">
+      <button class="unset" type="submit" title="add item">
         <Icon name="add-sm" />
 
         <span style="font-style: italic;">add item</span>

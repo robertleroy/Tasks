@@ -14,13 +14,21 @@
   let appWidth = $state(0);
   let showSidebar = $state(true);
   let addingList = $state(false);
+  let mounted = $state(false);
 
-  $effect(() => {
+  $effect(async () => {
     if (appWidth > 600) {
       showSidebar = true;
     }
     if (appWidth < 600) {
-      showSidebar = false;
+      if (!mounted) {
+        mounted = true;
+        await tick()
+        showSidebar = true;
+      } else {
+        showSidebar = false;
+      }
+      
     }
   });
 
@@ -111,6 +119,7 @@
         {#if data?.user}
 
           <button class="addNewListBtn link"
+            title="add list"
             onclick={async () => {
               goto("/#newListName");
               await tick();
