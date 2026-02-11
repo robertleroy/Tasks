@@ -24,5 +24,5 @@ services:
     restart: always
     depends_on:
       - tasks-app
-volumes:
-  tasks-db: # This tells Docker to manage a permanent storage area 
+# volumes:
+#   tasks-db: # This tells Docker to manage a permanent storage area 
