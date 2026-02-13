@@ -10,7 +10,9 @@
 <br />
 
 <p>
-  A tasks app persisted to a sqLite database..
+  A tasks app 
+  <br>
+  .. persisted to a sqLite database..
   <br />
   .. served over a Tailscale network
 </p>

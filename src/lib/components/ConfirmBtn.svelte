@@ -1,31 +1,17 @@
 <script>
   import { Icon } from "$lib/components";
+  import { clickOutside } from "$lib";
   let { txt1=null, txt2="🗙", warning=false, onconfirm, ...attr } = $props();
   let pending = $state(false);
-
-
-	function clickOutside(node) {
-		const handleClick = (event) => {
-			if (!node.contains(event.target)) 
-				node.dispatchEvent(new CustomEvent('outclick'));
-		};
-		document.addEventListener('click', handleClick, true);
-	
-		return {
-			destroy() {
-				document.removeEventListener('click', handleClick, true);
-		}};
-	}
 </script>   
-<!-- <div class=""></div> -->
   
-<button use:clickOutside class="unset" {...attr}
+<button class="unset" {...attr}
 	class:warning={warning && pending} 
 	onclick={() => {
 		if (pending) onconfirm();
 		pending = !pending;
 	}}
-	onoutclick={() => pending = false}>
+	{@attach (node) => clickOutside(node, () => pending = false )}>
   <!-- {pending ? txt2 : txt1} -->
    {#if pending}
    <div class="txt2">{txt2}</div>

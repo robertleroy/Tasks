@@ -79,7 +79,6 @@
     border-radius: 0.5rem;
     box-shadow: var(--box-shadow);
     cursor: default;
-    /* margin: 4rem auto ; */
   }
 
   input {

@@ -2,7 +2,7 @@
   import { 
     onMount, tick, page, dev, 
     enhance, invalidateAll, goto, 
-    config, store, clickOutside, swipe 
+    config, store, swipe 
   } from "$lib";
   import { dev_icon, favicon, circles } from "$lib/assets";
   import { ConfirmBtn, Icon, ListSidebar, MenuToggle } from "$lib/components";
@@ -19,16 +19,17 @@
   $effect(async () => {
     if (appWidth > 600) {
       showSidebar = true;
-    }
-    if (appWidth < 600) {
-      if (!mounted) {
+    } else {
+      /*  The goal is to direct the view on small screens such that your landing page shows lists when you land, or the page when you have no lists (auth page).
+      Is it accurate? time will tell...
+      development in progress.. */
+      if (!mounted && data?.user) {
         mounted = true;
         await tick()
         showSidebar = true;
       } else {
         showSidebar = false;
       }
-      
     }
   });
 
@@ -55,7 +56,7 @@
 <svelte:head>
   <title>{config.appname}{dev ? " : dev" : ""}</title>
   {#key store.darkmode}
-    <link rel="icon" href={dev ? dev_icon : favicon} />
+    <link rel="icon" href={dev ? favicon : favicon} />
   {/key}
 </svelte:head>
 
@@ -101,10 +102,10 @@
       {/if}
     </div>
   </header>
+  
 
-  <main use:swipe
-    onswipe={(e) => {
-    const {pointerType,direction} = e.detail;
+  <main {@attach (node) => swipe(node, data => {
+    const {pointerType,direction} = data;
     if (appWidth < 600) {
       if (direction === "right" && showSidebar === false) {
         showSidebar = true
@@ -112,8 +113,7 @@
         showSidebar = false
       }
     }
-  }}
-  >
+	})} >
     <aside class:hideSidebar={!showSidebar}>
       <div class="sidebar">
         {#if data?.user}

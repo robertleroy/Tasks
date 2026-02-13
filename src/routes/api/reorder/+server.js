@@ -26,13 +26,11 @@ export const POST = async ({ request, locals }) => {
             dataToUpdate.checkedPosition = update.checkedPosition;
           }
         }
-
         await tx.update(table).set(dataToUpdate).where(eq(table.id, update.id));
       }
     });
-
-
     return json({ success: true });
+    
   } catch (e) {
     console.error("Reorder Error:", e.message);
     return json({ error: e.message }, { status: 500 });

@@ -107,6 +107,5 @@ function requireLogin() {
   if (!locals.user) {
     return redirect(302, "/auth");
   }
-
   return locals.user;
 }

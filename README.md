@@ -35,6 +35,6 @@ The app is a multilist tasks app (checklists)
 <br>
 
 ```sh
-git add . && git commit -m "updated theme cookie values"
+git add . && git commit -m "updated"
 git push
 ```

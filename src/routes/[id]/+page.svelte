@@ -47,7 +47,6 @@
       }
     });
 
-
     const response = await fetch("/api/reorder", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -55,8 +54,7 @@
         type: "items",
         updates,
       }),
-    });
-  
+    });  
 
     if (response.ok) {
       await invalidateAll(); 
@@ -91,7 +89,6 @@
 
   async function updateListName(newName) {
     // Only update if the name actually changed
-
     const res = await fetch("/api/lists", {
       method: "PATCH",
       body: JSON.stringify({
@@ -114,11 +111,9 @@
     if (res.ok) goto("/");
   }
 
-  onMount(async () => {
-    
+  onMount(async () => {    
     if (data?.items.length === 0) {
       addNewItemForm.requestSubmit();
-
     }
   });
 </script>
@@ -279,28 +274,21 @@
         font-size: 1rem;
         height: 1.25em;
       }
-
-      /* input.editbox {
-        font-size: inherit;
-      } */       
     }
   }
   .listItem {
     display: flex;
     gap: 0.25rem;
     align-items: center;
-    /* align-items: center; */
     padding: 4px 0;
 
     .strike {
       text-decoration: line-through;
     }
     [type="checkbox"] {
-      /* font-size: 1.25em; */
       --cb-size: 1.125rem;
       &::before,
       &::after {
-        /* top: 0.25em; */
         top: 0.1875em;
       }
     }

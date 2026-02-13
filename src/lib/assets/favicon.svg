@@ -1,3 +1,20 @@
-		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-			<path d="M 19,6 10,15 6,11 4,13 10,19 21,8Z"/>
-		</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+  <defs>
+    <filter id="b" width="1.396" height="1.527" x="-.171" y="-.218" style="color-interpolation-filters:sRGB">
+      <feFlood flood-color="#000" flood-opacity="1" result="flood"/>
+      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="1"/>
+      <feOffset dx=".75" dy="1" in="blur" result="offset"/>
+      <feComposite in="flood" in2="offset" operator="in" result="comp1"/>
+      <feComposite in="SourceGraphic" in2="comp1" result="comp2"/>
+    </filter>
+    <filter id="a" width="1.29" height="1.29" x="-.12" y="-.12" style="color-interpolation-filters:sRGB">
+      <feFlood flood-color="#000" flood-opacity="1" result="flood"/>
+      <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="1"/>
+      <feOffset dx="1" dy="1" in="blur" result="offset"/>
+      <feComposite in="flood" in2="offset" operator="out" result="comp1"/>
+      <feComposite in="comp1" in2="SourceGraphic" operator="atop" result="comp2"/>
+    </filter>
+  </defs>
+  <rect width="20" height="20" x="2" y="2" rx="2" ry="2" style="fill:#292929;filter:url(#a)"/>
+  <path d="m17 6.5-7 7-3-3-2 2 5 5 9-9z" style="fill:#d9d9d9;filter:url(#b)"/>
+</svg>

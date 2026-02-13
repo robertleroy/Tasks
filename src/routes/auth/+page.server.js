@@ -81,7 +81,6 @@ export const actions = {
       const session = await auth.createSession(sessionToken, userId);
       auth.setSessionTokenCookie(event, sessionToken, session.expiresAt);
 
-      // select "id", "username", "password_hash" from "user" where "user"."username" = ?
       return {
         success: true,
         registered: true,

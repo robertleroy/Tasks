@@ -52,9 +52,8 @@ export const actions = {
         checkedPosition: nextPosition,
         checked: false,
       });
-
-
       return { success: true, id };
+      
     } catch (err) {
       console.error(err);
       return fail(500, { message: "Could not add item" });

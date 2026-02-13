@@ -21,5 +21,5 @@
 
 export * from "./store.svelte.js";
 export * from "./utils/functions";
-export { clickOutside } from "./utils/actions";
-export { focus } from "./utils/attachments";
+// export { clickOutside } from "./utils/actions";
+export { focus, swipe, clickOutside } from "./utils/attachments";

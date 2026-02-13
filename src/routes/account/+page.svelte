@@ -80,16 +80,13 @@
       {#if !pendingConfirmation}
         <button type="button" onclick={() => (pendingConfirmation = true)}> Delete account </button>
       {:else}
-        <button
-          use:clickOutside
-          style="color: tomato; 
+        <button style="color: tomato; 
           box-shadow: 0 0 16px hsl(from tomato h s l / 0.4);"
-          onoutclick={() => {
+          {@attach (node) => clickOutside(node, () => {
             if (pendingConfirmation) {
               pendingConfirmation = false;
             }
-          }}
-        >
+        })}>
           Confirm Delete
         </button>
       {/if}
@@ -195,15 +192,12 @@
         font-size: 1.125rem;
       }
     }
-    
-
     .row {
       display: flex;
       justify-content: space-between;
       gap: 0 1ch;
     }
   }
-
   #target_panel {
     position-anchor: --anchor_edit;
     &::backdrop {
