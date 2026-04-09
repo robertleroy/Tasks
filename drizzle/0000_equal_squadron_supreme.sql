@@ -5,6 +5,7 @@ CREATE TABLE `list_items` (
 	`checked` integer DEFAULT false NOT NULL,
 	`active_position` integer DEFAULT 0 NOT NULL,
 	`checked_position` integer DEFAULT 0 NOT NULL,
+	`version` integer DEFAULT 1 NOT NULL,
 	FOREIGN KEY (`list_id`) REFERENCES `lists`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
@@ -13,7 +14,8 @@ CREATE TABLE `lists` (
 	`user_id` text,
 	`name` text NOT NULL,
 	`position` integer DEFAULT 0 NOT NULL,
-	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE no action
+	`version` integer DEFAULT 1 NOT NULL,
+	FOREIGN KEY (`user_id`) REFERENCES `user`(`id`) ON UPDATE no action ON DELETE cascade
 );
 --> statement-breakpoint
 CREATE TABLE `session` (

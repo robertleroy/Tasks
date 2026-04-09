@@ -66,7 +66,7 @@
     <form
       method="post"
       action="?/deleteAccount"
-      use:enhance={() => {
+      use:enhance={() => {      
         return async ({ result, update }) => {
           if (result.type === "success" && result.data?.success) {
             store.notice = `deleted: ${result.data.username}`;

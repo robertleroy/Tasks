@@ -38,3 +38,11 @@ The app is a multilist tasks app (checklists)
 git add . && git commit -m "updated"
 git push
 ```
+
+
+### Migrate
+
+```sh
+npx drizzle-kit generate
+npx drizzle-kit migrate
+```

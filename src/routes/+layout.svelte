@@ -15,6 +15,7 @@
   let showSidebar = $state(true);
   let addingList = $state(false);
   let mounted = $state(false);
+	let timer = $state(null);
 
   $effect(async () => {
     if (appWidth > 600) {
@@ -31,7 +32,20 @@
         showSidebar = false;
       }
     }
+    if (store.notice) {
+      clearNotice()
+    }
+    if (store.errorMsg) {
+      clearErrorMsg()
+    }
   });
+
+  function clearNotice() {
+    timer = setTimeout(() => store.notice = null, 3000);
+  }
+  function clearErrorMsg() {
+    timer = setTimeout(() => store.errorMsg = null, 5000);
+  }
 
   onMount(() => {
     const dataset_theme = document.documentElement.dataset.theme;
@@ -87,6 +101,8 @@
 
         <div class="featurebar">
           <!-- spacer for now -->
+
+          <div class="error">{store.errorMsg}</div>
         </div>
 
         <div class="settings">
@@ -141,6 +157,11 @@
             </nav>
           </div>
         {/if}
+
+        <!-- {#each {length: 35} as item, i}
+          <div class="item">Item {i + 1}</div>
+        {/each} -->
+
       </div>
       <!-- sidebar -->
     </aside>
@@ -157,7 +178,7 @@
 
   <footer>
     <div class="inner">
-      <!-- <span>{store?.notice}</span> -->
+      <span>{store?.notice}</span>
     </div>
   </footer>
 

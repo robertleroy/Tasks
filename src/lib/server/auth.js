@@ -115,6 +115,7 @@ export function deleteSessionTokenCookie(event) {
       httpOnly: true,
       sameSite: "lax",
   });
+  
 }
 
 

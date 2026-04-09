@@ -6,9 +6,24 @@ import { json } from "@sveltejs/kit";
 export const PATCH = async ({ request, locals }) => {
   if (!locals.user) return json({ message: "Unauthorized" }, { status: 401 });
 
-  const { id, name, checked } = await request.json();
+  const { id, name, checked, version } = await request.json();
 
-  await db.update(listItems).set({ name, checked }).where(eq(listItems.id, id));
+  const result = await db
+    .update(listItems)
+    .set({ name, checked, version: version + 1 })
+    .where(
+      and(
+        eq(listItems.id, id), 
+        eq(listItems.version, version)
+      )
+    );
+
+    if (!result.rowsAffected) {
+      return json(
+        { error: "version conflict" },
+        { status: 409 }
+      );
+    }
 
   return json({ success: true });
 };

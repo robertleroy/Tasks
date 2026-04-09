@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "c0b850bc-a9c6-4707-ae03-dc69c5b3ed51",
+  "id": "569e8df0-fe6b-4550-974b-827f0f9e5d01",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "list_items": {
@@ -51,6 +51,14 @@
           "notNull": true,
           "autoincrement": false,
           "default": 0
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
         }
       },
       "indexes": {},
@@ -104,6 +112,14 @@
           "notNull": true,
           "autoincrement": false,
           "default": 0
+        },
+        "version": {
+          "name": "version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false,
+          "default": 1
         }
       },
       "indexes": {},
@@ -118,7 +134,7 @@
           "columnsTo": [
             "id"
           ],
-          "onDelete": "no action",
+          "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },

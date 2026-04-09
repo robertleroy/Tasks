@@ -10,13 +10,27 @@ export const PATCH = async ({ request, locals }) => {
   const user = locals.user;
   if (!user) return json({ error: "Unauthorized" }, { status: 401 });
 
-  const { id, name } = await request.json();
+  const { id, name, version } = await request.json();
 
   try {
-    await db
+    const result = await db
       .update(lists)
-      .set({ name })
-      .where(and(eq(lists.id, id), eq(lists.userId, user.id)));
+      .set({ name, version: version + 1 })
+      .where(
+        and(
+          eq(lists.id, id), 
+          eq(lists.userId, user.id),
+          eq(lists.version, version)
+        )
+      );
+
+    if (!result.rowsAffected) {
+      console.log("server" );
+      return json(
+        { error: "version conflict" },
+        { status: 409 }
+      );
+    }
 
     return json({ success: true });
   } catch (err) {

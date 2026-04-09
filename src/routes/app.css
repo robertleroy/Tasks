@@ -8,7 +8,7 @@
   --pad: 1rem;
 
   @media (min-width: 600px) {    
-    --sidebar-width: 260px;
+    --sidebar-width: 300px;
   }
 }
 
@@ -75,11 +75,14 @@ aside {
   width: var(--sidebar-width);
   transition: width 300ms;
 
+  overflow-y: auto;
+  overflow-x: hidden;
+
   .sidebar {
     position: relative;
     width: var(--sidebar-width);
     min-width: 260px;
-    padding: var(--pad);
+    padding: var(--pad) var(--pad) calc(var(--pad) * 2);
   }
 
   
@@ -153,7 +156,8 @@ footer {
 
   .inner {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+    justify-content: center;
     align-items: center;
     gap: 0 var(--pad);
     padding: 0.25rem var(--pad);
@@ -269,5 +273,12 @@ input[type="text"].editbox {
   a.unset {
     line-height: 1;
   }
+}
+.error {
+  color: tomato;
+  /* font-variant: small-caps; */
+  font-family: var(--monospace);
+  font-size: var(--h6);
+  text-align: center;
 }
 /* #region utility */

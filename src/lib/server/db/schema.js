@@ -18,9 +18,10 @@ export const session = sqliteTable('session', {
 
 export const lists = sqliteTable('lists', {
 	id: text('id').primaryKey(),
-  userId: text('user_id').references(() => user.id),
+  userId: text('user_id').references(() => user.id, { onDelete: 'cascade' }),
   name: text('name').notNull(),
-  position: integer('position').notNull().default(0) // Used for Sidebar sorting
+  position: integer('position').notNull().default(0),
+  version: integer('version').notNull().default(1),
 });
 
 export const listItems = sqliteTable('list_items', {
@@ -30,4 +31,5 @@ export const listItems = sqliteTable('list_items', {
   checked: integer('checked', { mode: 'boolean' }).notNull().default(false),
   activePosition: integer('active_position').notNull().default(0),
   checkedPosition: integer('checked_position').notNull().default(0),
+  version: integer('version').notNull().default(1),
 });

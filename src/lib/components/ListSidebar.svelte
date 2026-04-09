@@ -26,7 +26,7 @@
     lists = lists;
 
     if (response.ok) {
-        console.log("Database updated successfully");
+        // console.log("Database updated successfully");
     } else {
         console.error("Database update failed");
     }
@@ -52,7 +52,7 @@
 <style>
   .row {
     display: flex;
-    align-items: center;
+    align-items: start;
     gap: 0 0.25rem;
   }
 </style>

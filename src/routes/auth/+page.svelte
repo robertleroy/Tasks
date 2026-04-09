@@ -21,7 +21,6 @@
     use:enhance={() => {
       return async ({ result, update }) => {
         if (result.type === "success") {
-          console.log("loggedin");
           if (result.data?.loggedin) {
             store.notice = `logged in: ${result.data?.username}`;
             await goto("/");

@@ -10,10 +10,21 @@
   let isAdding = $state(false);
   let currentList = $derived(data?.list);
   let addNewItemForm = $state();
+  const concurrencyErrorMessage = "error: version conflict";
 
-  let activeItems = $derived(data.items.filter((item) => !item.checked).toSorted((a, b) => a.activePosition - b.activePosition));
+  let activeItems = $derived(data.items
+    .filter((item) => !item.checked)
+    .toSorted((a, b) =>
+      (a.activePosition - b.activePosition) || a.id.localeCompare(b.id)
+    )
+  );
 
-  let checkedItems = $derived(data.items.filter((item) => item.checked).toSorted((a, b) => a.checkedPosition - b.checkedPosition));
+  let checkedItems = $derived(data.items
+    .filter((item) => item.checked)
+    .toSorted((a, b) => 
+      (a.checkedPosition - b.checkedPosition) || a.id.localeCompare(b.id)
+    )
+  );
 
   async function updateItem(item) {
     const response = await fetch("/api/items", {
@@ -22,8 +33,16 @@
         id: item.id,
         name: item.name,
         checked: item.checked,
+        version: item.version
       }),
     });
+
+    if (response.status === 409) {
+      store.errorMsg = concurrencyErrorMessage;
+      await invalidateAll();
+      return;
+    }
+
     if (response.ok) {
       await invalidateAll();
     }
@@ -58,7 +77,6 @@
 
     if (response.ok) {
       await invalidateAll(); 
-      console.log("Database updated successfully");
     } else {
       console.error("Database update failed");
     }
@@ -94,8 +112,15 @@
       body: JSON.stringify({
         id: currentList.id,
         name: newName,
+        version: currentList.version
       }),
     });
+
+    if (res.status === 409) {
+      store.errorMsg = concurrencyErrorMessage;
+      await invalidateAll();
+      return;
+    }
 
     if (res.ok) {
       await invalidateAll();
@@ -125,6 +150,7 @@
         type="text"
         class="editbox"
         value={currentList.name}
+        placeholder="list name.."
         onchange={(e) => updateListName(e.target.value)}
         onkeydown={(e) => {
           if (e.key === "Enter" && !event.shiftKey) e.target.blur();
@@ -143,20 +169,24 @@
 <section class="activeList">
   <SortableList items={activeItems} onOrderChange={(ids) => handleItemOrderChange(ids, "active")}>
     {#each activeItems as item (item.id)}
+      
       <div class="listItem" data-id={item.id}
         transition:slide={{ duration: store.listChange ? 0 : 300 }}>
         <div class="drag-handle">
           <Icon name="drag-handle-md" />
         </div>
 
+        {#key item}
         <input
           type="checkbox"
           checked={item.checked}
-          onchange={(e) => {
+          onchange={async (e) => {
+            // await tick();
             item.checked = e.target.checked;
             updateItem(item);
           }}
         />
+        {/key}
 
         {#key item?.checked}
           <input
@@ -220,12 +250,12 @@
 {#if checkedItems.length > 0}
   <section class="checkedList">
     <hr />
-    <SortableList items={checkedItems} onOrderChange={(ids) => handleItemOrderChange(ids, "checked")}>
+    <!-- <SortableList items={checkedItems} onOrderChange={(ids) => handleItemOrderChange(ids, "checked")}> -->
       {#each checkedItems as item (item.id)}
         <div class="listItem" data-id={item.id}
           transition:slide={{ duration: store.listChange ? 0 : 300 }}>
           <div class="drag-handle">
-            <Icon name="drag-handle-md" />
+            <!-- <Icon name="drag-handle-md" /> -->
           </div>
 
           <input
@@ -248,7 +278,7 @@
           />
         </div>
       {/each}
-    </SortableList>
+    <!-- </SortableList> -->
   </section>
 {/if}
 
@@ -266,6 +296,11 @@
         font-weight: 600;
         height: unset;        
         padding: unset;
+        flex: 1;
+        &::placeholder { 
+          font-weight: normal;
+          font-size: 1rem;
+        }
       }
 
       .titlecancelbtn {
@@ -295,6 +330,7 @@
   }
   .activeList {
     margin-block: 1rem;
+    padding-bottom: 1rem;
     input[type="text"] {
       flex: 1;
     }

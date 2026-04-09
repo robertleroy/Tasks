@@ -58,7 +58,7 @@ export function swipe(node, handleSwipe) {
 
 <div class=""
   {@attach (node) => swipe(node, data => {
-		console.log("data",data);
+		("data",data);
 	})} >
   swipe data in console <br />
 </div>

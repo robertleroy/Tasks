@@ -80,16 +80,12 @@ export const actions = {
     const formData = await event.request.formData();
     const userid = formData.get("userid");
     const username = formData.get("username");
-
+    
     try {
-      await auth.invalidateSession(event.locals.session.id);
-
+      await auth.invalidateSession(event.locals.session.id);   
       await auth.deleteSessionTokenCookie(event);
-
-      console.log("deleted", username);
-
-      await db.delete(table.user).where(eq(table.user.id, userid));
-
+      const result = await db.delete(table.user).where(eq(table.user.id, userid));
+      
       return {
         success: true,
         id: userid,
